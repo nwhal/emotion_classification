@@ -79,34 +79,56 @@ def count_labels(data):
 '''
 Builds a vocabulary list of unique tokens
 -----------------------------------------------------------------------------------------------------------------------------
-inputs: [LIST] 2D list containing label, text pairings
-outputs: [LIST] Returns list of unique tokents from input
+inputs: [LIST] List of texts
+outputs: [DICT] Returns dict of words and indices
 
-ex. [['anger', 'i am super mad right now'], ['sadness', 'i am super sad right now']] -> [i, am, super, mad, right now, sad]
+ex. ['i am super mad right now', 'sadness', 'i am super sad right now'] -> {'I':1, 'am':2, 'super':3, 'mad':4, 
+'right':5, 'now':6, 'sad':7}
 '''
 def build_vocab(data):
-    res = dict()
+    words = set()
 
     for i in data:
-        toks = i[1].split()
-        for tok in toks:
-            res.update({tok:1})
+        s = i.split()
+        for word in s:
+            words.add(word)
     
-    return res.keys()
+    words = list(words)
 
+    indices = [i for i in range(len(words))]
 
+    res = dict(zip(words, indices))
 
-
-
-'''
-TESTING:
-
-x = getdata('CL_S2/Team_Lab_Test/isear-train.csv')
-labes = count_labels(x)
-print(labes)
-print(len(x))
-print(sum(labes.values()))
-
-print(build_vocab(x))
+    return res
 
 '''
+Separates labels from text. 
+-----------------------------------------------------------------------------------------------------------------------------
+inputs: [LIST] Data - 2D list containg text and labels.
+outputs: [LIST] X - list of texts, [LIST] y - list of corresponding labels
+'''
+def sep_labels(data):
+    X = []
+    y = []
+    for i in data:
+        y.append(i[0])
+        X.append(i[1])
+    return X, y
+
+'''
+The prep_data() accepts 2 CSV file names/paths as inputs, and returns
+cleaned and separated training and test data.
+-----------------------------------------------------------------------------------------------------------------------------
+inputs: [STRING] Training file path, [STRING] Test file path
+outputs: [LIST] X_train - list of training texts, [LIST] y_train - list of labels corresponding to X_train, 
+[LIST] X_test - list of texts for testing, [LIST] y_test - A list of labels corresponding to X_test. 
+
+'''
+def prep_data(train_file, test_file):
+    training_data = getdata(train_file)
+    testing_data = getdata(test_file)
+
+    X_train, y_train = sep_labels(training_data)
+    X_test, y_test = sep_labels(testing_data)
+
+    return X_train, y_train, X_test, y_test
