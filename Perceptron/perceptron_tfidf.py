@@ -12,7 +12,7 @@ class Perceptron:
         self.labels = None
 
         #TF_IDF
-        tf_idf_model = tfidf.Tfidf(self.X_train, self.y_train)
+        tf_idf_model = tfidf.Tfidf(self.X_train, Y=self.y_train, train=True)
         tf_idf_model.tf_idf()
         self.feature_vecs = tf_idf_model.tf_idf_d
         # Get unique labels
@@ -53,8 +53,8 @@ class Perceptron:
                          
 
     # Returns list of predicted labels given X_test parameter
-    def predict(self, X_test, y_test):
-        test_model = tfidf.Tfidf(X_test, y_test)
+    def predict(self, X_test):
+        test_model = tfidf.Tfidf(X_test)
         test_model.tf_idf()
         train_vecs = test_model.tf_idf_d
 
@@ -64,7 +64,7 @@ class Perceptron:
             for label in self.labels:
                 dot_product = 0
                 for feature in train_vecs[sent]:
-                    if feature != 'LABEL' and feature in self.weight_vecs[label]:
+                    if feature in self.weight_vecs[label]:
                         dot_product += train_vecs[sent][feature] * self.weight_vecs[label][feature]
                 emotion_scores[label] = dot_product
             argmax = max(emotion_scores, key=emotion_scores.get)
