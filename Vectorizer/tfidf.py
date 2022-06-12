@@ -11,9 +11,10 @@ class Tfidf:
     Inputs: [LIST] X - a list of texts to vectorize, [LIST] Y - a list of labels for the text
     Outputs: None
     '''
-    def __init__(self, X, Y):
+    def __init__(self, X, Y=None, train=False):
         self.X = X
         self.Y = Y
+        self.train = train
         self.num_docs = len(X)
         self.doc_ids = [i for i in range(len(X))]
         self.collection = list(zip(self.doc_ids, self.X))
@@ -88,6 +89,7 @@ class Tfidf:
             for word in self.tf_idf_d[doc]:
                 self.tf_idf_d[doc][word] = self.tf_idf_d[doc][word] * self.idf_dict[word]
         
-        # Add correct label to vector
-        for i in range(len(self.Y)):
-            self.tf_idf_d[i]['LABEL'] = self.Y[i]
+        if self.train == True:
+            # Add correct label to vector
+            for i in range(len(self.Y)):
+                self.tf_idf_d[i]['LABEL'] = self.Y[i]
