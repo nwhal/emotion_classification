@@ -2,7 +2,7 @@ import data_utils as du
 import math
 '''
 Class definition for TFIDF vectorizor. Builds a dictionary representation of TFIDF
-encoded vectors. 
+encoded vectors.  
 '''
 class Tfidf:
     '''
