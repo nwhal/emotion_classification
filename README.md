@@ -1,12 +1,12 @@
 # Emotion Classification
-This project uses the mult-class perceptron algorithm to classify emotions and is trained on the ISEAR dataset. The program consists of four main parts:\
+This project uses the multi-class perceptron algorithm to classify emotions and is trained on the ISEAR dataset. The program consists of four main parts:\
 * Data_Utils - A data utilities module for cleaning and preparing data
 * Evaluation - An evaluation class which uses a confusion matrix to calculate precision, recall, and F1 score
 * Vectorizer - A class which uses Tf-idf to create feature vectors from text
 * Perceptron - A perceptron class which implements a linear classifier for training and predicting emotion labels given text input
 
 ## Data-Utils
-The data utilities module, data_utils.py, contains the function, prep_data(). The function accepts two positional arguments: the path to the training ISEAR file and a path to the test ISEAR file. The function returns 4 lists:\
+The data utilities module, data_utils.py, contains the function, prep_data(). The function accepts two positional arguments: the path to the training ISEAR file and a path to the test ISEAR file. The function returns 4 lists:
 * X_train - a list of cleaned training texts
 * y_train - a list of labels corresponding to X_train
 * X_test - a list of cleaned texts to validate the model
@@ -18,7 +18,7 @@ X_train, y_train, X_test, y_test = prep_data(path_to_train_file, path_to_test_fi
 ```
 
 ## Evaluation
-The Evaluation class found in evaluator.py calculates precision, recall, and F1 score for a set of predictions during validation. The class is initialized with two positional arguments:\
+The Evaluation class found in evaluator.py calculates precision, recall, and F1 score for a set of predictions during validation. The class is initialized with two positional arguments:
 * A list of predicted labels
 * A list of true labels
 The class can be initialized as follows:
