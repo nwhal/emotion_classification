@@ -89,4 +89,30 @@ class Evaluator:
             f_score = (2 * p * r)/(p + r)
             # Update F1 score dictionary with calculated F1 score
             self.f_score[key] = f_score
+    
+
+    def accuracy(self):
+        total_tp = 0
+        total_tn = 0
+        total_fp = 0
+        total_fn = 0
+
+        labels = list(set(self.conf_matrix.keys()))
+
+        for label in labels:
+            print(label)
+            total_tp += self.conf_matrix[label]['tp']
+            total_tn += self.conf_matrix[label]['tn']
+            total_fp += self.conf_matrix[label]['fp']
+            total_fn += self.conf_matrix[label]['fn']
+        
+        trues = total_tp + total_tn
+        falses = total_fp + total_fn
+
+        acc = trues/(trues + falses)
+
+        return acc
+
+
+
 
