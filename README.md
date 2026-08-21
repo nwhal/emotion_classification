@@ -1,2 +1,2 @@
-# Emotion Classification: Team Lab
+# Emotion Classification
 Welcome to the repository for our SS2022 team lab. This repository contains two folders. The first is the advanced methods portion of the project which uses BERT fine-tuning to classify emotions on the ISEAR dataset. The second is the baseline portion which uses the multi-class perceptron algorithm and TF-IDF vectorization. Instructions on running the modules and notebooks can be found in the respective README.md files for these folders.
